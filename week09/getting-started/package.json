@@ -1,0 +1,16 @@
+{
+  "name": "getting-started",
+  "version": "1.0.0",
+  "description": "This is to help me know what I'm doing",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node ./week09/getting-started/server.js"
+  },
+  "author": "CJ Waisath",
+  "license": "ISC",
+  "dependencies": {
+    "ejs": "^2.7.2",
+    "express": "^4.17.1"
+  }
+}
