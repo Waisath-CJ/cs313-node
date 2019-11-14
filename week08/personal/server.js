@@ -16,4 +16,4 @@ let handleRequest = (req, res) => {
     }
 }
 
-http.createServer(handleRequest).listen(8080 || process.env.PORT)
+http.createServer(handleRequest).listen(process.env.PORT || 8080)
