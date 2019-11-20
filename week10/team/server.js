@@ -8,23 +8,21 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 
 app.set('port', PORT)
+    .use(express.static(__dirname + "/public"))
     .get('/', (req,res)=>{
-        console.log('Received a request for the \'/\' directory / endpoint');
-        res.write('This is the root directory');
-        res.end();
+        res.sendFile('index.html', {root: __dirname + '/public'});
     })
-    .get('/getPerson', (req, res)=> {
-        pool.query("SELECT * FROM People", function(err, result) {
-            // If an error occurred...
+    .get('/getPerson', (req, res) => {
+        var sql = "SELECT * FROM People WHERE id = $1::int";
+        var params = [req.query.id]
+        pool.query(sql, params, (err, result) => {
             if (err) {
-                console.log("Error in query: ")
+                console.log("Error in query: ");
                 console.log(err);
             }
-        
-            // Log this to the console for debugging purposes.
-            console.log("Back from DB with result:");
-            console.log(result.rows);
 
+            console.log("Back from DB with result: ");
+            console.log(result.rows);
             res.json(result.rows);
         });
     })
