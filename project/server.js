@@ -15,22 +15,19 @@ app.set('port', PORT)
     .get('/', (req,res)=>{
         res.sendFile('index.html', {root: __dirname + '/public'});
     })
-    .get('/getHomework', getHomework)
+    .get('/getHomework', (req, res) => {
+        var sql = "SELECT * FROM Homework";
+        pool.query(sql, (err, result) => {
+            if (err) {
+                console.log("Error in query: ");
+                console.log(err);
+            }
+
+            console.log("Back from DB with result: ");
+            console.log(result.rows);
+            res.json(result.rows); 
+        });
+    })
     .listen(app.get('port'), () => {
         console.log('Listening on port: ' + app.get('port'));
     });
-
-
-function getHomework(req, res) {
-    var sql = "SELECT * FROM Homework";
-    pool.query(sql, (err, result) => {
-        if (err) {
-            console.log("Error in query: ");
-            console.log(err);
-        }
-
-        console.log("Back from DB with result: ");
-        console.log(result.rows);
-        res.json(result.rows); 
-    });
-}
