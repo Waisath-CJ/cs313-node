@@ -31,6 +31,6 @@ function getHomework(req, res) {
 
         console.log("Back from DB with result: ");
         console.log(result.rows);
-        res.json(result.rows);
+        res.json(result.rows); 
     });
 }
