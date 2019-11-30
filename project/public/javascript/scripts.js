@@ -11,7 +11,7 @@ function getHomework() {
 
             txt += "</tbody></table>";
 
-            document.getElementById('hwDisplay').innerHTML = txt;
+            document.getElementById("hwDisplay").innerHTML = txt;
         }
     };
     
