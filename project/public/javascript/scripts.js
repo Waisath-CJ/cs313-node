@@ -10,12 +10,10 @@ function getHomework() {
             }
 
             txt += "</tbody></table>";
-
             document.getElementById("hwDisplay").innerHTML = txt;
         }
     };
     
     xhttp.open("GET", "/getHomework", true);
-    console.log("Sending AJAX request...");
     xhttp.send();
 }
