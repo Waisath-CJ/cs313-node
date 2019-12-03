@@ -28,6 +28,12 @@ app.set('port', PORT)
             res.json(result.rows); 
         });
     })
+    .post('/login', (req, res) => {
+        var username = req.body.username;
+        var password = req.body.pwd;
+        console.log("Logging in user: " + username + " with password: " + password);
+        res.end("Logged in!");
+    })
     .listen(app.get('port'), () => {
         console.log('Listening on port: ' + app.get('port'));
     });
