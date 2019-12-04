@@ -1,6 +1,12 @@
-require("dotenv").config({path: __dirname + "/variables.env"});
+require('dotenv').config({path: 'variables.env'});
 const express = require("express");
 const app = express();
+const {Pool} = require('pg');
+const connectionString = process.env.DATABASE_URL; 
+const pool = new Pool({connectionString: connectionString});
+process.env["NODE_TLS_REJECT_UNAUTHORIZED"] = 0;
+const bcrypt = require('bcrypt');
+const saltRounds = 10;
 
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
@@ -35,14 +41,30 @@ function handleLogin(req, res) {
     console.log("Username: " + username + "\nPassword: " + password);
     var success = false;
 
-    if (username == "admin" && password == "password") {
-        success = true;
-    }
+    var sql = "SELECT * FROM Test WHERE username = $1::varchar";
+    var params = [username];
+    pool.query(sql, params, (err, result) => {
+        if (err) {
+            console.log("Error in query: ");
+            console.log(err);
+        }
 
-    req.session.username = username;
+        console.log("Back from DB with result: ");
+        console.log(result.rows);
 
-    var json = {success: success};
-    res.json(json);
+        bcrypt.compare(password, result.rows[0].password, (err, result)=>{
+            if (err) {
+                console.log("An error occured... \n" + err);
+            }
+
+            if (result == true) {
+                success = true;
+            }
+            req.session.username = username;
+            var json = {success: success};
+            res.json(json);
+        });
+    });
 }
 
 function handleLogout(req, res) {
