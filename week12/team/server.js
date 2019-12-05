@@ -59,8 +59,8 @@ function handleLogin(req, res) {
 
             if (result == true) {
                 success = true;
+                req.session.username = username;
             }
-            req.session.username = username;
             var json = {success: success};
             res.json(json);
         });
