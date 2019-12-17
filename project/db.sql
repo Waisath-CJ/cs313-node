@@ -20,4 +20,4 @@ CREATE TABLE Homework (
 
 INSERT INTO Users (firstName, lastName, email, username, password) VALUES ('admin', 'person', 'admin@me.com', 'admin', '$2b$10$nxO6yGMpApInpj0Q81j05eylztIFvMSGGzfFurMxBu6WwatAtYJuy');
 
-INSERT INTO Homework (userId, hwName, hwType, dueDate) VALUES (1, 'Milestone 1 Submission', 'Assignment', '2019-11-10'), (1, 'Design Test', 'Exam', '2019-11-18'), (1, 'SDD Workday', 'Discussion Board', '2019-11-25');
+INSERT INTO Homework (userId, hwName, hwType, dueDate) VALUES (1, 'Milestone 1 Submission', 'Assignment', '2019-11-10'), (1, 'Design Test', 'Exam', '2019-11-18'), (1, 'SDD Workday', 'Discussion Board', '2019-11-25'), (1, 'Project 2 Submission', 'Project', '2019-12-16');
