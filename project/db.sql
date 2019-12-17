@@ -1,13 +1,5 @@
-DROP TABLE UserHomework;
 DROP TABLE Homework;
 DROP TABLE Users;
-
-CREATE TABLE Homework (
-    id              SERIAL          PRIMARY KEY,
-    hwName          varchar(50)     NOT NULL,
-    hwType          varchar(25)     NOT NULL,
-    dueDate         date            NOT NULL
-);
 
 CREATE TABLE Users (
     id              SERIAL          PRIMARY KEY,
@@ -18,14 +10,14 @@ CREATE TABLE Users (
     password        varchar(100)    NOT NULL
 );
 
-CREATE TABLE UserHomework (
+CREATE TABLE Homework (
     id              SERIAL          PRIMARY KEY,
-    users_id        int             REFERENCES Users(id),
-    homework_id     int             REFERENCES Homework(id)
+    userId          int             REFERENCES Users(id),
+    hwName          varchar(50)     NOT NULL,
+    hwType          varchar(25)     NOT NULL,
+    dueDate         date            NOT NULL
 );
 
-INSERT INTO Homework (hwName, hwType, dueDate) VALUES ('Milestone 1 Submission', 'Assignment', '2019-11-10'), ('Design Test', 'Exam', '2019-11-18'), ('SDD Workday', 'Discussion Board', '2019-11-25');
+INSERT INTO Users (firstName, lastName, email, username, password) VALUES ('admin', 'person', 'admin@me.com', 'admin', '$2b$10$nxO6yGMpApInpj0Q81j05eylztIFvMSGGzfFurMxBu6WwatAtYJuy');
 
-INSERT INTO Users (firstName, lastName, email, username, password) VALUES ('admin', 'person', 'admin@me.com', 'admin', 'password');
-
-INSERT INTO UserHomework (users_id, homework_id) VALUES (1, 1), (1, 2), (1, 3);
+INSERT INTO Homework (userId, hwName, hwType, dueDate) VALUES (1, 'Milestone 1 Submission', 'Assignment', '2019-11-10'), (1, 'Design Test', 'Exam', '2019-11-18'), (1, 'SDD Workday', 'Discussion Board', '2019-11-25');
